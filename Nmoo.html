@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+          content="#0f766e">
+
+    <title>
+        مصروفي | إدارة المصروفات
+    </title>
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            background:
+                #f5f7f9;
+
+            color:
+                #1f2937;
+
+            min-height:
+                100vh;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+
+            background:
+                #0f766e;
+
+            color:
+                white;
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                1000;
+
+            box-shadow:
+                0 4px 20px
+                rgba(0,0,0,0.10);
+        }
+
+
+        .header-container {
+
+            max-width:
+                1200px;
+
+            margin:
+                auto;
+
+            height:
+                72px;
+
+            padding:
+                0 20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+        }
+
+
+        .logo {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+        }
+
+
+        .logo-icon {
+
+            width:
+                45px;
+
+            height:
+                45px;
+
+            background:
+                rgba(255,255,255,0.15);
+
+            border-radius:
+                13px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                23px;
+        }
+
+
+        .logo-text {
+
+            font-size:
+                21px;
+
+            font-weight:
+                bold;
+        }
+
+
+        .logo-text small {
+
+            display:
+                block;
+
+            font-size:
+                11px;
+
+            font-weight:
+                normal;
+
+            opacity:
+                0.75;
+        }
+
+
+        .header-date {
+
+            font-size:
+                13px;
+
+            opacity:
+                0.9;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        main {
+
+            max-width:
+                1200px;
+
+            margin:
+                auto;
+
+            padding:
+                35px 20px 60px;
+        }
+
+
+        /* =====================================================
+           WELCOME
+        ===================================================== */
+
+        .welcome {
+
+            margin-bottom:
+                25px;
+        }
+
+
+        .welcome h1 {
+
+            font-size:
+                30px;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .welcome p {
+
+            color:
+                #6b7280;
+
+            font-size:
+                14px;
+        }
+
+
+        /* =====================================================
+           STATISTICS
+        ===================================================== */
+
+        .stats {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                18px;
+
+            margin-bottom:
+                25px;
+        }
+
+
+        .stat-card {
+
+            background:
+                white;
+
+            border-radius:
+                18px;
+
+            padding:
+                22px;
+
+            box-shadow:
+                0 5px 25px
+                rgba(0,0,0,0.05);
+
+            border:
+                1px solid #edf0f2;
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+        }
+
+
+        .stat-card::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            right:
+                0;
+
+            top:
+                0;
+
+            width:
+                5px;
+
+            height:
+                100%;
+
+            background:
+                #0f766e;
+        }
+
+
+        .stat-icon {
+
+            width:
+                45px;
+
+            height:
+                45px;
+
+            border-radius:
+                13px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                21px;
+
+            margin-bottom:
+                12px;
+        }
+
+
+        .income-icon {
+
+            background:
+                #dcfce7;
+        }
+
+
+        .expense-icon {
+
+            background:
+                #fee2e2;
+        }
+
+
+        .balance-icon {
+
+            background:
+                #ccfbf1;
+        }
+
+
+        .stat-label {
+
+            color:
+                #6b7280;
+
+            font-size:
+                13px;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .stat-value {
+
+            font-size:
+                25px;
+
+            font-weight:
+                bold;
+        }
+
+
+        .income-value {
+
+            color:
+                #15803d;
+        }
+
+
+        .expense-value {
+
+            color:
+                #dc2626;
+        }
+
+
+        .balance-value {
+
+            color:
+                #0f766e;
+        }
+
+
+        .currency {
+
+            font-size:
+                13px;
+
+            font-weight:
+                normal;
+
+            color:
+                #6b7280;
+        }
+
+
+        /* =====================================================
+           CONTENT GRID
+        ===================================================== */
+
+        .content-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                380px 1fr;
+
+            gap:
+                22px;
+
+            align-items:
+                start;
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .panel {
+
+            background:
+                white;
+
+            border-radius:
+                20px;
+
+            border:
+                1px solid #edf0f2;
+
+            box-shadow:
+                0 5px 25px
+                rgba(0,0,0,0.05);
+
+            padding:
+                24px;
+        }
+
+
+        .panel-title {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            margin-bottom:
+                22px;
+        }
+
+
+        .panel-title h2 {
+
+            font-size:
+                19px;
+        }
+
+
+        .panel-title span {
+
+            font-size:
+                22px;
+        }
+
+
+        .form-group {
+
+            margin-bottom:
+                16px;
+        }
+
+
+        .form-group label {
+
+            display:
+                block;
+
+            margin-bottom:
+                7px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                bold;
+
+            color:
+                #374151;
+        }
+
+
+        .form-group input,
+        .form-group select {
+
+            width:
+                100%;
+
+            height:
+                47px;
+
+            border:
+                1px solid #dfe3e8;
+
+            border-radius:
+                11px;
+
+            padding:
+                0 14px;
+
+            background:
+                #fafafa;
+
+            outline:
+                none;
+
+            font-size:
+                14px;
+
+            transition:
+                0.25s;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color:
+                #0f766e;
+
+            background:
+                white;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(15,118,110,0.10);
+        }
+
+
+        /* =====================================================
+           TYPE BUTTONS
+        ===================================================== */
+
+        .type-buttons {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .type-btn {
+
+            height:
+                48px;
+
+            border:
+                1px solid #ddd;
+
+            background:
+                #fafafa;
+
+            border-radius:
+                11px;
+
+            font-weight:
+                bold;
+
+            transition:
+                0.25s;
+        }
+
+
+        .type-btn.active-expense {
+
+            background:
+                #fee2e2;
+
+            border-color:
+                #ef4444;
+
+            color:
+                #b91c1c;
+        }
+
+
+        .type-btn.active-income {
+
+            background:
+                #dcfce7;
+
+            border-color:
+                #22c55e;
+
+            color:
+                #15803d;
+        }
+
+
+        /* =====================================================
+           ADD BUTTON
+        ===================================================== */
+
+        .add-btn {
+
+            width:
+                100%;
+
+            height:
+                50px;
+
+            border:
+                none;
+
+            border-radius:
+                12px;
+
+            background:
+                #0f766e;
+
+            color:
+                white;
+
+            font-size:
+                15px;
+
+            font-weight:
+                bold;
+
+            transition:
+                0.25s;
+        }
+
+
+        .add-btn:hover {
+
+            background:
+                #115e59;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =====================================================
+           TRANSACTIONS
+        ===================================================== */
+
+        .transactions-header {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .transactions-header h2 {
+
+            font-size:
+                19px;
+        }
+
+
+        .filters {
+
+            display:
+                flex;
+
+            gap:
+                8px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .search {
+
+            height:
+                40px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius:
+                10px;
+
+            padding:
+                0 12px;
+
+            outline:
+                none;
+
+            width:
+                180px;
+
+            font-size:
+                13px;
+        }
+
+
+        .filter-select {
+
+            height:
+                40px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius:
+                10px;
+
+            padding:
+                0 10px;
+
+            outline:
+                none;
+
+            font-size:
+                13px;
+
+            background:
+                white;
+        }
+
+
+        /* =====================================================
+           TRANSACTION LIST
+        ===================================================== */
+
+        .transaction-list {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                10px;
+
+            max-height:
+                500px;
+
+            overflow-y:
+                auto;
+
+            padding-left:
+                3px;
+        }
+
+
+        .transaction {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            padding:
+                14px;
+
+            background:
+                #fafafa;
+
+            border:
+                1px solid #f0f1f3;
+
+            border-radius:
+                13px;
+
+            transition:
+                0.2s;
+        }
+
+
+        .transaction:hover {
+
+            background:
+                #f5f7f8;
+        }
+
+
+        .transaction-icon {
+
+            min-width:
+                44px;
+
+            width:
+                44px;
+
+            height:
+                44px;
+
+            border-radius:
+                12px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                20px;
+        }
+
+
+        .transaction.expense
+        .transaction-icon {
+
+            background:
+                #fee2e2;
+        }
+
+
+        .transaction.income
+        .transaction-icon {
+
+            background:
+                #dcfce7;
+        }
+
+
+        .transaction-info {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+        }
+
+
+        .transaction-name {
+
+            font-weight:
+                bold;
+
+            font-size:
+                14px;
+
+            white-space:
+                nowrap;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
+        }
+
+
+        .transaction-category {
+
+            font-size:
+                11px;
+
+            color:
+                #888;
+
+            margin-top:
+                2px;
+        }
+
+
+        .transaction-date {
+
+            font-size:
+                10px;
+
+            color:
+                #aaa;
+
+            margin-top:
+                2px;
+        }
+
+
+        .transaction-amount {
+
+            font-weight:
+                bold;
+
+            font-size:
+                14px;
+
+            white-space:
+                nowrap;
+        }
+
+
+        .transaction.expense
+        .transaction-amount {
+
+            color:
+                #dc2626;
+        }
+
+
+        .transaction.income
+        .transaction-amount {
+
+            color:
+                #15803d;
+        }
+
+
+        .delete-btn {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            background:
+                #f3f4f6;
+
+            color:
+                #ef4444;
+
+            font-size:
+                16px;
+
+            transition:
+                0.2s;
+        }
+
+
+        .delete-btn:hover {
+
+            background:
+                #fee2e2;
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ===================================================== */
+
+        .empty {
+
+            text-align:
+                center;
+
+            padding:
+                50px 20px;
+
+            color:
+                #9ca3af;
+        }
+
+
+        .empty-icon {
+
+            font-size:
+                50px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .empty h3 {
+
+            color:
+                #6b7280;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .empty p {
+
+            font-size:
+                13px;
+        }
+
+
+        /* =====================================================
+           CHART SECTION
+        ===================================================== */
+
+        .bottom-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                22px;
+
+            margin-top:
+                22px;
+        }
+
+
+        .chart-container {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            min-height:
+                300px;
+        }
+
+
+        .chart {
+
+            width:
+                210px;
+
+            height:
+                210px;
+
+            border-radius:
+                50%;
+
+            background:
+                conic-gradient(
+                    #0f766e 0deg 360deg
+                );
+
+            position:
+                relative;
+
+            transition: background 0.3s ease;
+        }
+
+
+        .chart::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                115px;
+
+            height:
+                115px;
+
+            background:
+                white;
+
+            border-radius:
+                50%;
+
+            top:
+                50%;
+
+            left:
+                50%;
+
+            transform:
+                translate(-50%, -50%);
+        }
+
+
+        .chart-center {
+
+            position:
+                absolute;
+
+            top:
+                50%;
+
+            left:
+                50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            z-index:
+                2;
+
+            text-align:
+                center;
+
+            width:
+                100px;
+        }
+
+
+        .chart-center strong {
+
+            display:
+                block;
+
+            font-size:
+                14px;
+        }
+
+
+        .chart-center span {
+
+            color:
+                #999;
+
+            font-size:
+                10px;
+        }
+
+
+        .categories {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                13px;
+        }
+
+
+        .category-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            font-size:
+                13px;
+        }
+
+
+        .category-name {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+        }
+
+
+        .dot {
+
+            width:
+                11px;
+
+            height:
+                11px;
+
+            border-radius:
+                50%;
+        }
+
+
+        /* =====================================================
+           DANGER BUTTON
+        ===================================================== */
+
+        .clear-btn {
+
+            margin-top:
+                20px;
+
+            width:
+                100%;
+
+            height:
+                42px;
+
+            border:
+                1px solid #fecaca;
+
+            background:
+                #fff;
+
+            color:
+                #dc2626;
+
+            border-radius:
+                10px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                bold;
+        }
+
+
+        .clear-btn:hover {
+
+            background:
+                #fef2f2;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            background:
+                #111827;
+
+            color:
+                #9ca3af;
+
+            text-align:
+                center;
+
+            padding:
+                25px 20px;
+
+            font-size:
+                13px;
+
+            margin-top:
+                60px;
+        }
+
+        /* =====================================================
+           RESPONSIVE DESIGN
+        ============================================        /* =====================================================
+           RESPONSIVE DESIGN
+        ===================================================== */
+
+        @media (max-width: 900px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .content-grid,
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">💰</div>
+                <div class="logo-text">
+                    مصروفي
+                    <small>إدارة المصروفات الشخصية</small>
+                </div>
+            </div>
+            <div class="header-date" id="currentDate">-- / -- / ----</div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <!-- WELCOME -->
+        <section class="welcome">
+            <h1>أهلاً بك 👋</h1>
+            <p>تتبع مدخولاتك ومصروفاتك اليومية بسهولة ويسر.</p>
+        </section>
+
+        <!-- STATISTICS -->
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-icon income-icon">📈</div>
+                <div class="stat-label">إجمالي الدخل</div>
+                <div class="stat-value income-value">
+                    <span id="totalIncome">0.00</span>
+                    <span class="currency">ر.س</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon expense-icon">📉</div>
+                <div class="stat-label">إجمالي المصروفات</div>
+                <div class="stat-value expense-value">
+                    <span id="totalExpense">0.00</span>
+                    <span class="currency">ر.س</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon balance-icon">💳</div>
+                <div class="stat-label">الرصيد المتبقي</div>
+                <div class="stat-value balance-value">
+                    <span id="totalBalance">0.00</span>
+                    <span class="currency">ر.س</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTENT GRID -->
+        <div class="content-grid">
+            <!-- ADD FORM PANEL -->
+            <div class="panel">
+                <div class="panel-title">
+                    <h2>إضافة معاملة</h2>
+                    <span>➕</span>
+                </div>
+
+                <form id="transactionForm">
+                    <div class="type-buttons">
+                        <button type="button" class="type-btn active-expense" id="btnExpense" onclick="setType('expense')">مصروف 🔴</button>
+                        <button type="button" class="type-btn" id="btnIncome" onclick="setType('income')">دخل 🟢</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="titleInput">العنوان</label>
+                        <input type="text" id="titleInput" placeholder="مثال: تسوق سوبرماركت" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amountInput">المبلغ (ر.س)</label>
+                        <input type="number" id="amountInput" placeholder="0.00" step="0.01" min="0.01" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryInput">الفئة</label>
+                        <select id="categoryInput">
+                            <!-- filled dynamically -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateInput">التاريخ</label>
+                        <input type="date" id="dateInput" required />
+                    </div>
+
+                    <button type="submit" class="add-btn">حفظ المعاملة</button>
+                </form>
+            </div>
+
+            <!-- TRANSACTIONS PANEL -->
+            <div class="panel">
+                <div class="transactions-header">
+                    <h2>سجل المعاملات</h2>
+                    <div class="filters">
+                        <input type="text" id="searchInput" class="search" placeholder="بحث..." oninput="renderApp()" />
+                        <select id="filterType" class="filter-select" onchange="renderApp()">
+                            <option value="all">الكل</option>
+                            <option value="expense">المصروفات</option>
+                            <option value="income">الدخل</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="transaction-list" id="transactionList">
+                    <!-- Rendered by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- CHART AND CATEGORIES GRID -->
+        <div class="bottom-grid">
+            <div class="panel">
+                <div class="panel-title">
+                    <h2>توزيع المصروفات</h2>
+                    <span>📊</span>
+                </div>
+                <div class="chart-container">
+                    <div class="chart" id="chartPie">
+                        <div class="chart-center">
+                            <strong id="chartCenterText">0%</strong>
+                            <span>المصروفات</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">
+                    <h2>حسب الفئة</h2>
+                    <span>🏷️</span>
+                </div>
+
+                <div class="categories" id="categoryBreakdown">
+                    <!-- Rendered by JavaScript -->
+                </div>
+
+                <button class="clear-btn" onclick="clearAllData()">مسح جميع البيانات 🗑️</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 مصروفي - جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const categories = {
+            expense: [
+                { id: 'food', name: 'طعام ومشروبات', icon: '🍔', color: '#ef4444' },
+                { id: 'shopping', name: 'تسوق', icon: '🛍️', color: '#f97316' },
+                { id: 'bills', name: 'فواتير واشتراكات', icon: '📄', color: '#eab308' },
+                { id: 'transport', name: 'مواصلات', icon: '🚗', color: '#06b6d4' },
+                { id: 'health', name: 'صحة وعلاج', icon: '💊', color: '#ec4899' },
+                { id: 'other_exp', name: 'أخرى', icon: '📦', color: '#6b7280' }
+            ],
+            income: [
+                { id: 'salary', name: 'راتب', icon: '💵', color: '#22c55e' },
+                { id: 'freelance', name: 'عمل حر', icon: '💻', color: '#10b981' },
+                { id: 'gift', name: 'هدية', icon: '🎁', color: '#8b5cf6' },
+                { id: 'other_inc', name: 'أخرى', icon: '💰', color: '#64748b' }
+            ]
+        };
+
+        let currentType = 'expense';
+        let transactions = JSON.parse(localStorage.getItem('masrofi_data')) || [];
+
+        document.getElementById('currentDate').innerText = new Date().toLocaleDateString('ar-SA');
+        document.getElementById('dateInput').valueAsDate = new Date();
+
+        function setType(type) {
+            currentType = type;
+            const btnExpense = document.getElementById('btnExpense');
+            const btnIncome = document.getElementById('btnIncome');
+
+            if (type === 'expense') {
+                btnExpense.className = 'type-btn active-expense';
+                btnIncome.className = 'type-btn';
+            } else {
+                btnIncome.className = 'type-btn active-income';
+                btnExpense.className = 'type-btn';
+            }
+            populateCategories();
+        }
+
+        function populateCategories() {
+            const categorySelect = document.getElementById('categoryInput');
+            categorySelect.innerHTML = categories[currentType].map(c => 
+                `<option value="${c.id}">${c.icon} ${c.name}</option>`
+            ).join('');
+        }
+
+        document.getElementById('transactionForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('titleInput').value;
+            const amount = parseFloat(document.getElementById('amountInput').value);
+            const categoryId = document.getElementById('categoryInput').value;
+            const date = document.getElementById('dateInput').value;
+
+            const newTx = {
+                id: Date.now(),
+                type: currentType,
+                title,
+                amount,
+                categoryId,
+                date
+            };
+
+            transactions.unshift(newTx);
+            saveAndRender();
+            e.target.reset();
+            document.getElementById('dateInput').valueAsDate = new Date();
+            setType('expense');
+        });
+
+        function deleteTransaction(id) {
+            transactions = transactions.filter(t => t.id !== id);
+            saveAndRender();
+        }
+
+        function clearAllData() {
+            if (confirm('هل أنت تأكد من مسح كافة البيانات؟')) {
+                transactions = [];
+                saveAndRender();
+            }
+        }
+
+        function saveAndRender() {
+            localStorage.setItem('masrofi_data', JSON.stringify(transactions));
+            renderApp();
+        }
+
+        function renderApp() {
+            const listEl = document.getElementById('transactionList');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const filterTypeVal = document.getElementById('filterType').value;
+
+            let totalInc = 0;
+            let totalExp = 0;
+
+            transactions.forEach(t => {
+                if (t.type === 'income') totalInc += t.amount;
+                if (t.type === 'expense') totalExp += t.amount;
+            });
+
+            document.getElementById('totalIncome').innerText = totalInc.toFixed(2);
+            document.getElementById('totalExpense').innerText = totalExp.toFixed(2);
+            document.getElementById('totalBalance').innerText = (totalInc - totalExp).toFixed(2);
+
+            const filtered = transactions.filter(t => {
+                const matchesSearch = t.title.toLowerCase().includes(searchVal);
+                const matchesType = filterTypeVal === 'all' || t.type === filterTypeVal;
+                return matchesSearch && matchesType;
+            });
+
+            if (filtered.length === 0) {
+                listEl.innerHTML = `
+                    <div class="empty">
+                        <div class="empty-icon">📂</div>
+                        <h3>لا توجد معاملات</h3>
+                        <p>أضف معاملة جديدة لتظهر هنا</p>
+                    </div>`;
+            } else {
+                listEl.innerHTML = filtered.map(t => {
+                    const catList = categories[t.type];
+                    const cat = catList.find(c => c.id === t.categoryId) || { name: 'عام', icon: '📌' };
+                    return `
+                        <div class="transaction ${t.type}">
+                            <div class="transaction-icon">${cat.icon}</div>
+                            <div class="transaction-info">
+                                <div class="transaction-name">${t.title}</div>
+                                <div class="transaction-category">${cat.name}</div>
+                                <div class="transaction-date">${t.date}</div>
+                            </div>
+                            <div class="transaction-amount">
+                                ${t.type === 'expense' ? '-' : '+'}${t.amount.toFixed(2)} ر.س
+                            </div>
+                            <button class="delete-btn" onclick="deleteTransaction(${t.id})">🗑️</button>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            renderChart(totalInc, totalExp);
+        }
+
+        function renderChart(totalInc, totalExp) {
+            const chartPie = document.getElementById('chartPie');
+            const chartText = document.getElementById('chartCenterText');
+            const breakdownEl = document.getElementById('categoryBreakdown');
+
+            const expCategories = categories.expense;
+            const expTotals = {};
+            let currentTotalExp = 0;
+
+            transactions.filter(t => t.type === 'expense').forEach(t => {
+                expTotals[t.categoryId] = (expTotals[t.categoryId] || 0) + t.amount;
+                currentTotalExp += t.amount;
+            });
+
+            let gradientStops = [];
+            let currentAngle = 0;
+
+            breakdownEl.innerHTML = expCategories.map(c => {
+                const amount = expTotals[c.id] || 0;
+                const percentage = currentTotalExp > 0 ? ((amount / currentTotalExp) * 100).toFixed(1) : 0;
+                
+                if (amount > 0) {
+                    const angle = (amount / currentTotalExp) * 360;
+                    gradientStops.push(`${c.color} ${currentAngle}deg ${currentAngle + angle}deg`);
+                    currentAngle += angle;
+                }
+
+                return `
+                    <div class="category-row">
+                        <div class="category-name">
+                            <span class="dot" style="background: ${c.color}"></span>
+                            <span>${c.icon} ${c.name}</span>
+                        </div>
+                        <strong>${amount.toFixed(2)} ر.س (${percentage}%)</strong>
+                    </div>
+                `;
+            }).join('');
+
+            if (gradientStops.length > 0) {
+                chartPie.style.background = `conic-gradient(${gradientStops.join(', ')})`;
+            } else {
+                chartPie.style.background = '#e5e7eb';
+            }
+
+            const expRatio = totalInc > 0 ? Math.min(100, ((totalExp / totalInc) * 100)).toFixed(0) : (totalExp > 0 ? 100 : 0);
+            chartText.innerText = `${expRatio}%`;
+        }
+
+        // Init
+        setType('expense');
+        renderApp();
+    </script>
+</body>
+</html>
+
